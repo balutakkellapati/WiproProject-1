@@ -1,0 +1,33 @@
+
+
+
+
+
+{%load static%}
+
+
+ <link rel="stylesheet" type='text/css' href="{% static 'css/main.css' %}"/>
+  <body>
+  <link rel="stylesheet" type='text/css' href="{% static 'css/main.css' %}"/>
+    <div class="login-box">
+<!--    <img src="wipro.jpg" class="wipro">-->
+    <h1>Login Here</h1>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+        <br><button><a href="{% url 'ForgetPassword' %}">Forgot Password?</a></button>
+    </form>
+            <!--<form>-->
+            <!--<p>Username</p>-->
+            <!--<input type="text" name="username" placeholder="Enter Username">-->
+            <!--<p>Password</p>-->
+            <!--<input type="password" name="password" placeholder="Enter Password">-->
+            <!--<input type="submit" name="submit" value="Login">-->
+            <!--<a href="#">Forget Password</a>-->
+            <!--</form>-->
+
+
+        </div>
+
+    </body>

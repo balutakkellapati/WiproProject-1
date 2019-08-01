@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{%load static%}
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<!--  Hi {{ user.username }}!-->
+
+  <link rel="stylesheet" type='text/css' href="{% static 'css/main.css' %}"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="navbar">
+       <button><a class="active" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i> Home</a></button>
+      <button><a href="{% url 'AddOrg' %}"><i class="fa fa-fw fa-wrench"></i> Add Organization</a></button>
+      <button><a href="{% url 'Assessment' %}"><i class="fa fa-fw fa-user"></i> Create Assesment</a></button>
+      <button><a href="{% url 'MyHistory' %}"><i class="fa fa-fw fa-search"></i> My History</a></button>
+      <button><a href="{% url 'ColleagueHistory' %}"><i class="fa fa-fw fa-search"></i> Colleague's history</a></button>
+        <button><a href="{% url 'login' %}"><i class="fa fa-fw fa-user"></i> Logout</a></button>
+      <button><a href="{% url 'Profile' %}"><i class="fa fa-fw fa-envelope"></i> Hi {{ user.username }}!</a></button>
+
+
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- The sidebar -->
+<!--  <div class="sidebar">-->
+<!--    <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>-->
+<!--    <a href="#addOrg"><i class="fa fa-fw fa-wrench"></i> Add Organization</a>-->
+<!--    <a href="#CreateAssesment"><i class="fa fa-fw fa-user"></i> Create Assesment</a>-->
+<!--    <a href="#myhistory"><i class="fa fa-fw fa-envelope"></i> My History</a>-->
+<!--    <a href="#colleage"><i class="fa fa-fw fa-envelope"></i> Find my colleague</a>-->
+<!--  </div>-->
+ <form action = "" method ="POST">
+     {% csrf_token %}
+
+<div id="Content">
+<table style="margin: auto; padding-top: 120px;">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2">Add an Organization</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong class="ttitle">Organization Name</strong>
+      </td>
+      <td class="tdcss"><input type="text" name="orgname"></td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="ttitle">Business ID</strong>
+      </td>
+      <td class="tdcss"><input type="text" name="businessID"></td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="ttitle">Size</strong>
+      </td>
+      <td class="tdcss">
+        <select name="size_dd">
+          <option value="Small">Small(less than 500)</option>
+          <option value="Medium">Medium(in 500-5000)</option>
+          <option value="Huge">Large(more than 5000)</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong class="ttitle">Business Domain</strong>
+      </td>
+      <td class="tdcss">
+        <select name="domain_dd">
+          <option value="HealthCare">HealthCare</option>
+          <option value="BankingandFinancial">Banking and Financial</option>
+          <option value="RealEstate">Real Estate</option>
+          <option value="Media">Media</option>
+        </select>
+      </td>
+    </tr>-->
+    <tr>
+      <td>
+        <strong class="ttitle">Location</strong>
+      </td>
+      <td class="tdcss"><input type="text" name="location"></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><button>Submit</button></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+ </form>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+
+
+{% endif %}
+{% endblock %}
+
+

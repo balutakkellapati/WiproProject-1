@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{%load static%}
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<!--  Hi {{ user.username }}!-->
+
+  <link rel="stylesheet" type='text/css' href="{% static 'css/main.css' %}"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="navbar">
+       <button><a class="active" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i> Home</a></button>
+      <button><a href="{% url 'AddOrg' %}"><i class="fa fa-fw fa-wrench"></i> Add Organization</a></button>
+      <button><a href="{% url 'Assessment' %}"><i class="fa fa-fw fa-user"></i> Create Assesment</a></button>
+      <button><a href="{% url 'MyHistory' %}"><i class="fa fa-fw fa-search"></i> My History</a></button>
+      <button><a href="{% url 'ColleagueHistory' %}"><i class="fa fa-fw fa-search"></i> Colleague's history</a></button>
+        <button><a href="{% url 'login' %}"><i class="fa fa-fw fa-user"></i> Logout</a></button>
+      <button><a href="{% url 'Profile' %}"><i class="fa fa-fw fa-envelope"></i> Hi {{ user.username }}!</a></button>
+
+
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<form acrion = "" method = "POST">
+  {% csrf_token %}
+
+<div id="Content">
+<table style="margin: auto; padding-top: 120px;">
+  <thead>
+    <tr>
+      <th scope="col">Add an Organization</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong class="ttitle">Category Name</strong>
+      </td>
+      <td class="tdcss"><input type="text" name="category_name"></td>
+    </tr>
+
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><button>Submit</button></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</form>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+
+
+{% endif %}
+{% endblock %}
+
+
