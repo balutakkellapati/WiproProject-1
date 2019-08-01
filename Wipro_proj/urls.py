@@ -33,7 +33,7 @@ urlpatterns = [
 	path('add_question/', views.add_question,name='add_question'),
     path('change_password/', views.change_password,name='change_password'),
     path('Assessment/', views.assessment,name='Assessment'),
-	# path('assessment_from_db/', views.assessment_from_db,name='assessment_from_db'),
+	path('assessment_from_db/', views.assessment,name='assessment_from_db'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'), # new

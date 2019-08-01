@@ -60,6 +60,18 @@
 <table style="margin: auto; padding-top: 100px;">
   <thead>
     <tr>
+        <td>
+            <strong class="title"> Organization </strong>
+        </td>
+        <td>
+            <select name="item_id">
+            {% for entry in item %}
+            <option value="{{ entry.id }}">{{ entry.name }}</option>
+            {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
       <th scope="col" colspan="1">Category </th>
       <th scope="col">Questions</th>
       <th scope="col">Ratings out of 3</th>
@@ -72,7 +84,7 @@
         <strong class="title">{{question.category_name}}</strong>
       </td>
       <td class="td1css">{{question.name}}</td>
-      <td class="tdcss"><select name="item_id">
+      <td class="tdcss"><select name="rating_id">
           <option value="NA">NA</option>
           <option value="0">0</option>
           <option value="1">1</option>

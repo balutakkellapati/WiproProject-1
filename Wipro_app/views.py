@@ -14,23 +14,6 @@ def login(request):
 	return render(request, 'registration/login.html')
 
 
-def AddOrg(request):
-	if request.method == 'POST':
-		if request.POST.get('orgname') and request.POST.get('businessID')and request.POST.get('location'):
-			org = Organization()
-			org.name = request.POST.get('orgname')
-			org.OrgID = request.POST.get('businessID')
-			org.OrgLocation = request.POST.get('location')
-			org.OrgSize = request.POST.get('size_dd')
-			org.OrgDomain = request.POST.get('domain_dd')
-			org.save()
-
-			return render(request, 'registration/AddOrg.html')
-
-	else:
-		return render(request, 'registration/AddOrg.html')
-
-
 def MyHistory(request):
 	return render(request, 'registration/MyHistory.html')
 
@@ -65,7 +48,7 @@ def add_question(request):
 	item = Category.objects.all()
 	if request.method == 'POST':
 		selected_item = get_object_or_404(Category, pk=request.POST.get('item_id'))
-		if request.POST.get('question_name','item_id'):
+		if request.POST.get('question_name', 'item_id'):
 			cat = Question()
 			cat.name = request.POST.get('question_name')
 			cat.category = selected_item
@@ -74,23 +57,58 @@ def add_question(request):
 	return render(request, 'add_question.html', {'item': item})
 
 def assessment(request):
-	questions = Question.objects.all()
 	item = Organization.objects.all()
+	questions = Question.objects.all()
 	if request.method == 'POST':
-
+		selected_item = get_object_or_404(Organization, pk=request.POST.get('item_id'))
+		selected_question = get_object_or_404(Organization, pk=request.POST.get('item_id'))
 		if request.POST.get('item_id'):
 			cat = Assessment()
 			mouse = questions_list()
-			# cat.org_ID = selected_item
-			# cat.user_ID = request.user.id
+			cat.org_ID = selected_item
+			cat.user_ID = request.user.id
+			cat.save()
 			# mouse.assessment_ID = cat.id
-			# mouse.rating = request.POST.get('item_id')
-			# mouse.question_ID =
-			# mouse.question_name =
-			# mouse.question_category_name =
-			mouse.save( )
-			# cat.save()
-	return render(request, 'registration/Assessment.html',{'item': item,'questions': questions})
+			mouse.rating = request.POST.get('rating_id')
+			# mouse.question_ID =	questions.id
+			# mouse.question_name =questions.name
+			# mouse.question_category_name =questions.category_name
+			mouse.save()
+	return render(request, 'assessment_db.html', {'item': item,'questions': questions})
+	# questions = Question.objects.all()
+	# item = Organization.objects.all()
+	# if request.method == 'POST':
+	# 	print('here')
+	# 	selected_item = get_object_or_404(Organization, pk=request.POST.get('item_id'))
+	# 	if request.POST.get('item_id'):
+	# 		cat = Assessment()
+	# 		# mouse = questions_list()
+	# 		cat.org_ID = selected_item
+	# 		cat.user_ID = request.user.id
+	# 		# mouse.assessment_ID = cat.id
+	# 		# mouse.rating = request.POST.get('rating_id')
+	# 		# mouse.question_ID =
+	# 		# mouse.question_name =
+	# 		# mouse.question_category_name =
+	# 		# mouse.save()
+	# 		cat.save()
+	# return render(request, 'registration/Assessment.html',{'item': item})
+
+
+def AddOrg(request):
+	if request.method == 'POST':
+		if request.POST.get('orgname') and request.POST.get('location'):
+			org = Organization()
+			org.name = request.POST.get('orgname')
+			org.OrgLocation = request.POST.get('location')
+			org.OrgSize = request.POST.get('size_dd')
+			org.OrgDomain = request.POST.get('domain_dd')
+			org.save()
+
+			return render(request, 'registration/AddOrg.html')
+
+	else:
+		return render(request, 'registration/AddOrg.html')
 
 
 def change_password(request):
